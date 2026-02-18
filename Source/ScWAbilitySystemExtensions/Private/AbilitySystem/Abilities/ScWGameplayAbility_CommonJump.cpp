@@ -2,8 +2,9 @@
 
 #include "AbilitySystem/Abilities/ScWGameplayAbility_CommonJump.h"
 
-#include "AbilitySystem/ScWCoreTags.h"
 #include "AbilitySystem/Tasks/ScWAT_WaitLanded.h"
+
+#include "Tags/ScWAbilitySystemExtensionsTags.h"
 
 #include "Abilities/Tasks/AbilityTask_WaitInputRelease.h"
 
@@ -11,13 +12,10 @@ UScWGameplayAbility_CommonJump::UScWGameplayAbility_CommonJump()
 {
 	{
 		auto Tags = GetAssetTags();
-		Tags.AddTag(FScWCoreTags::Ability_Movement_Jump);
+		Tags.AddTag(FScWAbilitySystemExtensionsTags::Ability_Type_Movement_Jump);
 		SetAssetTags(Tags);
 	}
-	CancelAbilitiesWithTag.AddTag(FScWCoreTags::Ability_CancelBy_JumpActivate);
-	BlockAbilitiesWithTag.AddTag(FScWCoreTags::Ability_CancelBy_JumpActivate);
-
-	ActivationOwnedTags.AddTag(FScWCoreTags::State_Jumping);
+	ActivationOwnedTags.AddTag(FScWAbilitySystemExtensionsTags::Character_State_Jumping);
 
 	bStopJumpingOnAbilityEnd = true;
 }

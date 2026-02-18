@@ -18,19 +18,21 @@ public class ScWAbilitySystemExtensions : ModuleRules
 		{
 			"Core",
 
-            "GameplayTags",
-            "GameplayTasks",
-            "GameplayAbilities",
+			"GameplayTags",
+			"GameplayTasks",
+			"GameplayAbilities",
 
-            "ScWGameCore",
-        });
+			"Niagara",
+
+			"ScWGameCore",
+		});
 
 		PrivateDependencyModuleNames.AddRange(new string[]
-        {
-            "CoreUObject",
-            "Engine",
+		{
+			"CoreUObject",
+			"Engine",
 
-            "NavigationSystem",
-        });
+			"NavigationSystem",
+		});
 	}
 }

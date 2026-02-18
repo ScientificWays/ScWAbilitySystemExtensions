@@ -16,6 +16,12 @@
 #include "Abilities/Tasks/AbilityTask.h"
 #include "AbilitySystemBlueprintLibrary.h"
 
+#include "NiagaraSystem.h"
+#include "NiagaraComponent.h"
+#include "NiagaraFunctionLibrary.h"
+
+#include "Net/UnrealNetwork.h"
+
 #include "Utils/ScWUtils.h"
 
 DECLARE_LOG_CATEGORY_EXTERN(LogScWAbilitySystemExtensions, Log, All);
