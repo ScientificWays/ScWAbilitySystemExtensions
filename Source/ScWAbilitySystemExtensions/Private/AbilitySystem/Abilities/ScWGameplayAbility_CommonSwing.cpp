@@ -94,15 +94,12 @@ void UScWGameplayAbility_CommonSwing::EndAbility(const FGameplayAbilitySpecHandl
 {
 	Super::EndAbility(InHandle, InActorInfo, InActivationInfo, bInReplicateEndAbility, bInWasCancelled);
 
-	if (CurrentSwingEffectHandle.IsValid())
+	if (AScWWeaponActor_CommonMelee* WeaponActor = BP_GetMeleeWeaponActor())
 	{
-		BP_RemoveSwingOwnerEffect();
-	}
-	AScWWeaponActor_CommonMelee* WeaponActor = BP_GetMeleeWeaponActor();
-	ensureReturn(WeaponActor);
-	if (WeaponActor->GetCurrentSwingPhase() != EScWSwingPhase::None)
-	{
-		WeaponActor->BP_EndSwing(bInWasCancelled);
+		if (WeaponActor->GetCurrentSwingPhase() != EScWSwingPhase::None)
+		{
+			WeaponActor->BP_EndSwing(bInWasCancelled);
+		}
 	}
 }
 //~ End Ability
@@ -116,10 +113,6 @@ float UScWGameplayAbility_CommonSwing::BP_HandlePreSwing_Implementation()
 	float OutPreSwingDelay = WeaponActor->BP_PreSwing();
 	ensureCancelAbilityReturn(OutPreSwingDelay >= 0.0f, 0.0f);
 
-	if (WeaponActor->SwingOwnerEffect && !WeaponActor->bSwingOwnerEffectOnlyDuringSwing)
-	{
-		BP_ApplySwingOwnerEffect();
-	}
 	return OutPreSwingDelay;
 }
 
@@ -140,10 +133,6 @@ float UScWGameplayAbility_CommonSwing::BP_HandleBeginSwing_Implementation()
 	}
 	ensureCancelAbilityReturn(OutSwingDuration >= 0.0f, 0.0f);
 
-	if (WeaponActor->SwingOwnerEffect && WeaponActor->bSwingOwnerEffectOnlyDuringSwing)
-	{
-		BP_ApplySwingOwnerEffect();
-	}
 	return OutSwingDuration;
 }
 
@@ -155,10 +144,6 @@ float UScWGameplayAbility_CommonSwing::BP_HandleEndSwing_Implementation()
 	float OutPostSwingDelay = WeaponActor->BP_EndSwing(false);
 	ensureCancelAbilityReturn(OutPostSwingDelay >= 0.0f, 0.0f);
 
-	if (CurrentSwingEffectHandle.IsValid() && WeaponActor->bSwingOwnerEffectOnlyDuringSwing)
-	{
-		BP_RemoveSwingOwnerEffect();
-	}
 	return OutPostSwingDelay;
 }
 
@@ -167,10 +152,6 @@ void UScWGameplayAbility_CommonSwing::BP_HandlePostSwing_Implementation()
 	AScWWeaponActor_CommonMelee* WeaponActor = BP_GetMeleeWeaponActor();
 	ensureCancelAbilityReturn(WeaponActor);
 
-	if (CurrentSwingEffectHandle.IsValid() && !WeaponActor->bSwingOwnerEffectOnlyDuringSwing)
-	{
-		BP_RemoveSwingOwnerEffect();
-	}
 	K2_EndAbility();
 }
 
@@ -186,31 +167,5 @@ TSubclassOf<UScWDamageType> UScWGameplayAbility_CommonSwing::BP_GetSwingDamageTy
 	AScWWeaponActor_CommonMelee* WeaponActor = BP_GetMeleeWeaponActor();
 	ensureReturn(WeaponActor, UScWDamageType::StaticClass());
 	return WeaponActor->BP_GetSwingDamageTypeClass();
-}
-
-void UScWGameplayAbility_CommonSwing::BP_ApplySwingOwnerEffect_Implementation()
-{
-	AScWWeaponActor_CommonMelee* WeaponActor = BP_GetMeleeWeaponActor();
-	ensureCancelAbilityReturn(WeaponActor);
-	ensureCancelAbilityReturn(WeaponActor->SwingOwnerEffect);
-
-	if (CurrentSwingEffectHandle.IsValid())
-	{
-		BP_RemoveSwingOwnerEffect();
-	}
-	UAbilitySystemComponent* OwnerASC = GetAbilitySystemComponentFromActorInfo();
-	ensureCancelAbilityReturn(OwnerASC);
-	CurrentSwingEffectHandle = UScWAbilitySystemGlobals::TryApplyGameplayEffectByClass(OwnerASC, WeaponActor->SwingOwnerEffect);
-}
-
-void UScWGameplayAbility_CommonSwing::BP_RemoveSwingOwnerEffect_Implementation()
-{
-	UAbilitySystemComponent* OwnerASC = GetAbilitySystemComponentFromActorInfo();
-	ensureCancelAbilityReturn(OwnerASC);
-
-	ensureCancelAbilityReturn(CurrentSwingEffectHandle.IsValid());
-	OwnerASC->RemoveActiveGameplayEffect(CurrentSwingEffectHandle);
-
-	CurrentSwingEffectHandle.Invalidate();
 }
 //~ End Swing

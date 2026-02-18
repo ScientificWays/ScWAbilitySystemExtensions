@@ -130,15 +130,6 @@ public:
 	UPROPERTY(Category = "Swing", EditDefaultsOnly, BlueprintReadOnly)
 	TSubclassOf<class UScWDamageType> SwingBaseDamageTypeClass;
 
-	UPROPERTY(Category = "Movement", EditDefaultsOnly, BlueprintReadOnly)
-	TSubclassOf<UGameplayEffect> SwingOwnerEffect;
-
-	UPROPERTY(Category = "Movement", EditDefaultsOnly, BlueprintReadOnly)
-	bool bSwingOwnerEffectOnlyDuringSwing;
-
-	UPROPERTY(Category = "Swing", EditDefaultsOnly, BlueprintReadOnly)
-	float PostSwingComboTimeWindow;
-
 	UPROPERTY(Category = "Swing", EditDefaultsOnly, BlueprintReadOnly)
 	float SwingAIMaxRange;
 

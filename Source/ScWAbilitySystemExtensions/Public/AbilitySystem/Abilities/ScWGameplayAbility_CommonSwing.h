@@ -68,12 +68,6 @@ protected:
 	UFUNCTION(Category = "Swing", BlueprintNativeEvent, BlueprintCallable, meta = (DisplayName = "Get SwingDamageTypeClass"))
 	MODULE_API TSubclassOf<class UScWDamageType> BP_GetSwingDamageTypeClass() const;
 
-	UFUNCTION(Category = "Swing", BlueprintNativeEvent, BlueprintCallable, meta = (DisplayName = "Apply SwingOwnerEffect"))
-	MODULE_API void BP_ApplySwingOwnerEffect();
-
-	UFUNCTION(Category = "Swing", BlueprintNativeEvent, BlueprintCallable, meta = (DisplayName = "Remove SwingOwnerEffect"))
-	MODULE_API void BP_RemoveSwingOwnerEffect();
-
 	UPROPERTY(Category = "Swing", EditAnywhere, BlueprintReadWrite)
 	bool bLoopIfInputIsPressed;
 

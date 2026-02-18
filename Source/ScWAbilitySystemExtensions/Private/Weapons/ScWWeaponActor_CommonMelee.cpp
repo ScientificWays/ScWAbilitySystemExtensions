@@ -16,9 +16,7 @@ AScWWeaponActor_CommonMelee::AScWWeaponActor_CommonMelee(const FObjectInitialize
 {
 	SwingBaseDamage = 10.0f;
 	SwingBaseDamageTypeClass = UScWDamageType::StaticClass();
-	bSwingOwnerEffectOnlyDuringSwing = true;
 
-	PostSwingComboTimeWindow = 0.4f;
 	SwingAIMaxRange = 128.0f;
 	SwingAIMaxRange_BlackboardKeyName = TEXT("MeleeRangeMax");
 
@@ -203,6 +201,7 @@ UNiagaraComponent* AScWWeaponActor_CommonMelee::BP_InitializeSwingParticles_Impl
 	if (DefaultSwingParticles)
 	{
 		USceneComponent* AttachToComponent = BP_GetFXAttachComponent();
+		ensureReturn(AttachToComponent, nullptr);
 
 		FFXSystemSpawnParameters SpawnParams;
 		SpawnParams.WorldContextObject = this;
