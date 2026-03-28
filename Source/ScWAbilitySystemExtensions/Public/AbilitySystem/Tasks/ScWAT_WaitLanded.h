@@ -7,7 +7,8 @@
 #include "ScWAT_WaitLanded.generated.h"
 
 /**
- * 
+ *	Waits for a character to land and forwards the landing hit result through an ability task delegate.
+ *	This is used by jump-like abilities that should complete once the avatar touches the ground again.
  */
 UCLASS(MinimalAPI, meta = (DisplayName = "[ScW] AT_WaitLand"))
 class UScWAT_WaitLanded : public UAbilityTask

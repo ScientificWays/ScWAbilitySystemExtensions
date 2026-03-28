@@ -34,8 +34,6 @@ AScWWeaponActor_CommonMelee::AScWWeaponActor_CommonMelee(const FObjectInitialize
 void AScWWeaponActor_CommonMelee::OnConstruction(const FTransform& InTransform) // AActor
 {
 	Super::OnConstruction(InTransform);
-
-	
 }
 
 void AScWWeaponActor_CommonMelee::BeginPlay() // AActor
@@ -98,7 +96,7 @@ float AScWWeaponActor_CommonMelee::BP_PreSwing_Implementation()
 	++SwingCounter;
 	BP_UpdateCurrentSwingVariantData();
 
-	const auto& CurrentSwingMontageData = CurrentSwingVariantData.MontageData;
+	const FScWCharacterMontageData& CurrentSwingMontageData = CurrentSwingVariantData.MontageData;
 
 	ensureReturn(CurrentSwingMontageData.GetRelevantTimingMontage(), -1.0f);
 	ensureReturn(CurrentSwingMontageData.GetRelevantTimingMontage()->GetNumSections() >= 3, -1.0f);
@@ -233,7 +231,7 @@ FVector AScWWeaponActor_CommonMelee::BP_GetPatternStartLocation_Implementation(c
 float AScWWeaponActor_CommonMelee::BP_GetNextPatternDelayTime_Implementation(int32 InNextPatternIndex) const
 {
 	const float SwingDuration = UScWAnimationsFunctionLibrary::GetMontageSectionLengthByIndexFromData(CurrentSwingVariantData.MontageData, SwingMontageSectionIndex) * SwingVariantBaseDuration;
-	const auto& TracePatterns = CurrentSwingVariantData.TracePatterns;
+	const TArray<FScWMeleeSwingVariantData_TracePattern>& TracePatterns = CurrentSwingVariantData.TracePatterns;
 	return (TracePatterns.Num() < 2) ? (0.0f) : (SwingDuration / (float)TracePatterns.Num());
 }
 
@@ -256,11 +254,7 @@ void AScWWeaponActor_CommonMelee::BP_HandleTracePattern_Implementation(const FSc
 	TArray<FHitResult> TraceHitResults;
 	FCollisionQueryParams TraceParams = FCollisionQueryParams::DefaultQueryParam;
 	UKismetSystemLibrary::SphereTraceMulti(this, TraceStart, TraceEnd, InPatternData.TraceShapeRadius, TraceTypeQuery_Melee, false, TracePatternIgnoredActors, TracePatternDebugType, TraceHitResults, true);
-	
-	/*if (TraceHitResults.IsEmpty())
-	{
-		return;
-	}*/
+
 	for (const FHitResult& SampleHitResult : TraceHitResults)
 	{
 		BP_HandleSwingHit(SampleHitResult.GetActor(), SampleHitResult);

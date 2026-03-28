@@ -14,6 +14,9 @@ DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FScWMeleeWeaponPreSwingSignature, fl
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FScWMeleeWeaponBeginSwingSignature, float, InSwingDuration);
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FScWMeleeWeaponEndSwingSignature, float, InEndSwingDelay, const bool, bInWasCancelled);
 
+/**
+ *	Tracks the current phase of a melee swing sequence on the weapon actor.
+ */
 UENUM(BlueprintType, meta = (DisplayName = "[ScW] Ability Input ID"))
 enum class EScWSwingPhase : uint8
 {
@@ -22,6 +25,9 @@ enum class EScWSwingPhase : uint8
 	Swing,
 };
 
+/**
+ *	Describes one trace step used while evaluating a melee swing variant.
+ */
 USTRUCT(BlueprintType, meta = (DisplayName = "[ScW] Melee Swing Variant Data: Trace Pattern"))
 struct FScWMeleeSwingVariantData_TracePattern
 {
@@ -40,6 +46,9 @@ struct FScWMeleeSwingVariantData_TracePattern
 	float TraceShapeRadius = 32.0f;
 };
 
+/**
+ *	Defines the montage and trace pattern data that make up a single melee swing variant.
+ */
 USTRUCT(BlueprintType, meta = (DisplayName = "[ScW] Melee Swing Variant Data"))
 struct FScWMeleeSwingVariantData
 {
@@ -56,7 +65,8 @@ struct FScWMeleeSwingVariantData
 };
 
 /**
- *
+ *	Provides the shared melee weapon actor flow for swing timing, hit detection, swing variants, and optional FX spawning.
+ *	The actor exposes Blueprint extension points for collision, trace patterns, damage payload, and presentation.
  */
 UCLASS(MinimalAPI, Abstract, Blueprintable, meta = (DisplayName = "[ScW] Weapon Actor (Melee)"))
 class AScWWeaponActor_CommonMelee : public AActor

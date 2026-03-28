@@ -11,7 +11,7 @@
 UScWGameplayAbility_CommonJump::UScWGameplayAbility_CommonJump()
 {
 	{
-		auto Tags = GetAssetTags();
+		FGameplayTagContainer Tags = GetAssetTags();
 		Tags.AddTag(FScWAbilitySystemExtensionsTags::Ability_Type_Movement_Jump);
 		SetAssetTags(Tags);
 	}
@@ -25,7 +25,7 @@ void UScWGameplayAbility_CommonJump::ActivateAbility(const FGameplayAbilitySpecH
 {
 	Super::ActivateAbility(InHandle, InActorInfo, InActivationInfo, InTriggerEventData);
 
-	if (CommitAbility(InHandle, InActorInfo, InActivationInfo) == false)
+	if (!CommitAbility(InHandle, InActorInfo, InActivationInfo))
 	{
 		CancelAbility(InHandle, InActorInfo, InActivationInfo, true);
 		return;

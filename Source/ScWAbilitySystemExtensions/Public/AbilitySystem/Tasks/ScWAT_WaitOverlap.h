@@ -9,7 +9,8 @@
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FTaskWaitOverlapDelegate, AActor*, InOverlapActor);
 
 /**
- * 
+ *	Waits for an overlap on the configured primitive component and forwards the overlapping actor to the ability.
+ *	The task can filter by actor class and optionally complete after the first valid overlap.
  */
 UCLASS(MinimalAPI, meta = (DisplayName = "[ScW] AT_WaitOverlap"))
 class UScWAT_WaitOverlap : public UAbilityTask

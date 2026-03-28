@@ -12,19 +12,21 @@
 #define MODULE_API SCWABILITYSYSTEMEXTENSIONS_API
 
 /**
- *
+ *	Cancels active abilities that match the configured tag filters when the owning gameplay effect is applied.
+ *	The component inspects asset, cancel, block, and activation tag sets on each activatable ability.
  */
-UCLASS(MinimalAPI, DisplayName = "[ScW] Cancel Abilities With Tags")
+UCLASS(MinimalAPI, meta = (DisplayName = "[ScW] Cancel Abilities With Tags"))
 class UScWGEC_CancelAbilitiesWithTags : public UGameplayEffectComponent
 {
 	GENERATED_BODY()
 
 public:
 	UScWGEC_CancelAbilitiesWithTags();
+
 protected:
 	virtual bool OnActiveGameplayEffectAdded(FActiveGameplayEffectsContainer& InContainer, FActiveGameplayEffect& InActiveEffect) const override; // UGameplayEffectComponent
-public:
 
+public:
 	UPROPERTY(Category = "Tags", EditDefaultsOnly)
 	FGameplayTagContainer AbilityTags;
 

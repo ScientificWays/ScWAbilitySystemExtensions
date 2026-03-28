@@ -7,7 +7,8 @@
 #include "ScWAT_WaitDamageBlock.generated.h"
 
 /**
- * 
+ *	Waits for a health component to report blocked damage and broadcasts the result through an ability task.
+ *	The task can optionally stop after the first matching blocked hit.
  */
 UCLASS(MinimalAPI, meta = (DisplayName = "[ScW] AT_WaitDamageBlock"))
 class UScWAT_WaitDamageBlock : public UAbilityTask

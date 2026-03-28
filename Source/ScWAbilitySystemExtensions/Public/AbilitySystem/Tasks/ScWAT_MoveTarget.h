@@ -9,7 +9,8 @@
 #include "ScWAT_MoveTarget.generated.h"
 
 /**
- * 
+ *	Moves or rotates a scene component over time as an ability task, with optional timeout and simulated task support.
+ *	The task can operate with uniform speed or per-axis movement speeds while reporting completion and target loss.
  */
 UCLASS(MinimalAPI, meta = (DisplayName = "[ScW] Move Target"))
 class UScWAT_MoveTarget : public UAbilityTask
@@ -51,7 +52,7 @@ protected:
 //~ Begin Simulate
 protected:
 	virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override; // UObject
-	virtual void InitSimulatedTask(UGameplayTasksComponent& InGameplayTasksComponent) override;
+	virtual void InitSimulatedTask(UGameplayTasksComponent& InGameplayTasksComponent) override; // UGameplayTask
 	virtual void PreDestroyFromReplication() override; // UObject
 //~ End Simulate
 

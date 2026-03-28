@@ -7,7 +7,8 @@
 #include "ScWAT_WaitDied.generated.h"
 
 /**
- * 
+ *	Waits for a health component to report death and then completes the owning ability task.
+ *	This is used to bridge death callbacks into a Blueprint-friendly ability task node.
  */
 UCLASS(MinimalAPI, meta = (DisplayName = "[ScW] AT_WaitDied"))
 class UScWAT_WaitDied : public UAbilityTask

@@ -7,7 +7,8 @@
 #include "ScWAT_ModifyCharacterMovement.generated.h"
 
 /**
- * 
+ *	Applies a temporary movement vector to a character movement component from an ability task.
+ *	The task supports additive force mode and optional timeout completion.
  */
 UCLASS(MinimalAPI, meta = (DisplayName = "[ScW] AT_ModifyCharacterMovement"))
 class UScWAT_ModifyCharacterMovement : public UAbilityTask

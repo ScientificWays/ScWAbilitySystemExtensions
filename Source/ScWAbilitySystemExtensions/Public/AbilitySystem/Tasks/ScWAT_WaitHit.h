@@ -9,7 +9,8 @@
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FTaskWaitHitSignature, AActor*, InHitActor);
 
 /**
- * 
+ *	Waits for a hit event on the configured primitive component and forwards the hit actor to the ability.
+ *	The task can optionally ignore the current movement base when filtering hit results.
  */
 UCLASS(MinimalAPI, meta = (DisplayName = "[ScW] AT_WaitHit"))
 class UScWAT_WaitHit : public UAbilityTask

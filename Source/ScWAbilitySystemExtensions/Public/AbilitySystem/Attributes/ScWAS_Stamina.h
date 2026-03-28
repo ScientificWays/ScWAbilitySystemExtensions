@@ -7,7 +7,8 @@
 #include "ScWAS_Stamina.generated.h"
 
 /**
- * 
+ *	Defines replicated stamina attributes and keeps stamina values clamped against the configured maximum.
+ *	The set exposes the standard Gameplay Ability System attribute accessors for stamina gameplay.
  */
 UCLASS(MinimalAPI, meta = (DisplayName = "[ScW] Stamina Attributes"))
 class UScWAS_Stamina : public UAttributeSet
@@ -15,7 +16,6 @@ class UScWAS_Stamina : public UAttributeSet
 	GENERATED_BODY()
 
 public:
-
 	UScWAS_Stamina();
 
 //~ Begin Replication

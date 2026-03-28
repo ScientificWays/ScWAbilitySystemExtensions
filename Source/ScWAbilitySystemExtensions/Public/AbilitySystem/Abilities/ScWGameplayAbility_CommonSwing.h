@@ -13,16 +13,15 @@
 class AScWWeaponActor_CommonMelee;
 
 /**
- * 
+ *	Coordinates the shared melee swing sequence for a weapon actor, including pre-swing, swing, and post-swing phases.
+ *	The ability can optionally capture damage data up front so repeated swing callbacks use a stable payload.
  */
 UCLASS(MinimalAPI, meta = (DisplayName = "[ScW] Common Swing Gameplay Ability"))
 class UScWGameplayAbility_CommonSwing : public UScWGameplayAbility
 {
-
 	GENERATED_BODY()
 
 public:
-
 	MODULE_API UScWGameplayAbility_CommonSwing();
 
 //~ Begin Ability

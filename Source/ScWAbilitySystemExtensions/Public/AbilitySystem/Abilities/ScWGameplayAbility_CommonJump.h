@@ -8,19 +8,16 @@
 
 #include "ScWGameplayAbility_CommonJump.generated.h"
 
-#define MODULE_API SCWGAMECORE_API
-
 /**
- * 
+ *	Activates the shared jump flow and ends when the avatar lands or the input is released.
+ *	The ability also optionally stops the character's jump state when the ability ends.
  */
 UCLASS(MinimalAPI, meta = (DisplayName = "[ScW] Common Jump Gameplay Ability"))
 class UScWGameplayAbility_CommonJump : public UScWGameplayAbility
 {
-
 	GENERATED_BODY()
 
 public:
-
 	UScWGameplayAbility_CommonJump();
 
 //~ Begin Ability
@@ -44,5 +41,3 @@ protected:
 	void OnAbilityInputReleaseCallback(float InTimeHeld);
 //~ End Jump
 };
-
-#undef MODULE_API

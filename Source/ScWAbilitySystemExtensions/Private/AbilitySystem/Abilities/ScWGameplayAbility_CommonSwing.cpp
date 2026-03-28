@@ -16,7 +16,7 @@
 UScWGameplayAbility_CommonSwing::UScWGameplayAbility_CommonSwing()
 {
 	{
-		auto Tags = GetAssetTags();
+		FGameplayTagContainer Tags = GetAssetTags();
 		Tags.AddTag(FScWAbilitySystemExtensionsTags::Ability_Type_Weapon_Swing);
 		SetAssetTags(Tags);
 	}

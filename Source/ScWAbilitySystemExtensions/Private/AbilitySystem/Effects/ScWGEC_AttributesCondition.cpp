@@ -11,7 +11,7 @@ UScWGEC_AttributesCondition::UScWGEC_AttributesCondition()
 
 bool UScWGEC_AttributesCondition::OnActiveGameplayEffectAdded(FActiveGameplayEffectsContainer& InContainer, FActiveGameplayEffect& InActiveEffect) const
 {
-	auto OwnerASC = InContainer.Owner;
+	UAbilitySystemComponent* OwnerASC = InContainer.Owner;
 	if (!ensure(OwnerASC))
 	{
 		return false;
@@ -51,7 +51,7 @@ void UScWGEC_AttributesCondition::OnGameplayEffectRemoved(const FGameplayEffectR
 
 void UScWGEC_AttributesCondition::OnAttributeChanged(const FOnAttributeChangeData& InData, FActiveGameplayEffectHandle InEffectHandle) const
 {
-	auto OwnerASC = InEffectHandle.GetOwningAbilitySystemComponent();
+	UAbilitySystemComponent* OwnerASC = InEffectHandle.GetOwningAbilitySystemComponent();
 	if (!ensure(OwnerASC))
 	{
 		return;
@@ -68,13 +68,13 @@ void UScWGEC_AttributesCondition::OnAttributeChanged(const FOnAttributeChangeDat
 
 bool UScWGEC_AttributesCondition::ShouldInhibitEffect(const FActiveGameplayEffect& InActiveEffect) const
 {
-	auto OwnerASC = InActiveEffect.Handle.GetOwningAbilitySystemComponent();
+	UAbilitySystemComponent* OwnerASC = InActiveEffect.Handle.GetOwningAbilitySystemComponent();
 	if (!ensure(OwnerASC))
 	{
 		return false;
 	}
-	auto ConditionValue = FMath::RoundToInt(OwnerASC->GetNumericAttribute(ConditionAttribute));
-	auto ConditionMaxValue = FMath::RoundToInt(OwnerASC->GetNumericAttribute(ConditionMaxAttribute));
+	const int32 ConditionValue = FMath::RoundToInt(OwnerASC->GetNumericAttribute(ConditionAttribute));
+	const int32 ConditionMaxValue = FMath::RoundToInt(OwnerASC->GetNumericAttribute(ConditionMaxAttribute));
 
 	return ConditionValue >= ConditionMaxValue;
 }
