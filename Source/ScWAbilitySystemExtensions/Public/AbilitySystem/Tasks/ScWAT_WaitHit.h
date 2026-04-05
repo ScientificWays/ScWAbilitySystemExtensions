@@ -6,6 +6,8 @@
 
 #include "ScWAT_WaitHit.generated.h"
 
+#define MODULE_API SCWABILITYSYSTEMEXTENSIONS_API
+
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FTaskWaitHitSignature, AActor*, InHitActor);
 
 /**
@@ -56,3 +58,5 @@ protected:
 	bool bIgnoreMovementBase;
 //~ End Hit
 };
+
+#undef MODULE_API

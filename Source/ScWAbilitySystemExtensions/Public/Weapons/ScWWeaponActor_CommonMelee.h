@@ -33,16 +33,16 @@ struct FScWMeleeSwingVariantData_TracePattern
 {
 	GENERATED_BODY()
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	UPROPERTY(Category = "Trace", EditAnywhere, BlueprintReadWrite)
 	FRotator TraceOffsetRotation = FRotator::ZeroRotator;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	UPROPERTY(Category = "Trace", EditAnywhere, BlueprintReadWrite)
 	FVector TraceOffsetLocation = FVector::ZeroVector;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	UPROPERTY(Category = "Trace", EditAnywhere, BlueprintReadWrite)
 	float TraceLength = 128.0f;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	UPROPERTY(Category = "Trace", EditAnywhere, BlueprintReadWrite)
 	float TraceShapeRadius = 32.0f;
 };
 
@@ -55,10 +55,10 @@ struct FScWMeleeSwingVariantData
 	GENERATED_BODY()
 
 	// Can be empty if no traces needed
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	UPROPERTY(Category = "Swing Variant", EditAnywhere, BlueprintReadWrite)
 	TArray<FScWMeleeSwingVariantData_TracePattern> TracePatterns;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	UPROPERTY(Category = "Swing Variant", EditAnywhere, BlueprintReadWrite)
 	FScWCharacterMontageData MontageData;
 
 	static const FScWMeleeSwingVariantData Invalid;

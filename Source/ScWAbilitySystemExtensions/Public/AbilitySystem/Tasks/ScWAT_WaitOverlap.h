@@ -6,6 +6,8 @@
 
 #include "ScWAT_WaitOverlap.generated.h"
 
+#define MODULE_API SCWABILITYSYSTEMEXTENSIONS_API
+
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FTaskWaitOverlapDelegate, AActor*, InOverlapActor);
 
 /**
@@ -25,7 +27,7 @@ public:
 //~ Begin Initialize
 public:
 
-	UFUNCTION(BlueprintCallable, Category = "Ability | Tasks", meta = (DisplayName = "[ScW] Wait for Overlap", HidePin = "InOwningAbility", DefaultToSelf = "InOwningAbility", BlueprintInternalUseOnly = "true"))
+	UFUNCTION(Category = "Ability | Tasks", BlueprintCallable, meta = (DisplayName = "[ScW] Wait for Overlap", HidePin = "InOwningAbility", DefaultToSelf = "InOwningAbility", BlueprintInternalUseOnly = "true"))
 	static UScWAT_WaitOverlap* ScWWaitOverlap(UGameplayAbility* InOwningAbility, UPrimitiveComponent* InCheckComponent, UClass* InOverlapClassFilter, const bool bInTriggerOnlyOnce = true);
 
 protected:
@@ -47,3 +49,5 @@ protected:
 	UPROPERTY()
 	bool bTriggerOnlyOnce;
 };
+
+#undef MODULE_API

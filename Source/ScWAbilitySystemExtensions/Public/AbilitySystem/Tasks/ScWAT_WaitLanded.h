@@ -6,6 +6,8 @@
 
 #include "ScWAT_WaitLanded.generated.h"
 
+#define MODULE_API SCWABILITYSYSTEMEXTENSIONS_API
+
 /**
  *	Waits for a character to land and forwards the landing hit result through an ability task delegate.
  *	This is used by jump-like abilities that should complete once the avatar touches the ground again.
@@ -43,3 +45,5 @@ protected:
 	FScriptDelegate LandedScriptDelegate;
 //~ End Task
 };
+
+#undef MODULE_API

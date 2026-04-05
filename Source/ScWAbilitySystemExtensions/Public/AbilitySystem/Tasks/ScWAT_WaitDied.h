@@ -6,6 +6,8 @@
 
 #include "ScWAT_WaitDied.generated.h"
 
+#define MODULE_API SCWABILITYSYSTEMEXTENSIONS_API
+
 /**
  *	Waits for a health component to report death and then completes the owning ability task.
  *	This is used to bridge death callbacks into a Blueprint-friendly ability task node.
@@ -23,7 +25,7 @@ public:
 //~ Begin Initialize
 public:
 
-	UFUNCTION(BlueprintCallable, Category = "Ability | Tasks", meta = (HidePin = "InOwningAbility", DefaultToSelf = "InOwningAbility", BlueprintInternalUseOnly = "true"))
+	UFUNCTION(Category = "Ability | Tasks", BlueprintCallable, meta = (HidePin = "InOwningAbility", DefaultToSelf = "InOwningAbility", BlueprintInternalUseOnly = "true"))
 	static UScWAT_WaitDied* WaitDied(UGameplayAbility* InOwningAbility, class UScWAttributeHealthComponent* InTargetHealthComponent);
 
 protected:
@@ -43,3 +45,5 @@ protected:
 	FScriptDelegate OnDiedScriptDelegate;
 //~ End Death
 };
+
+#undef MODULE_API

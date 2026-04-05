@@ -8,6 +8,8 @@
 
 #include "ScWGEC_AttributesCondition.generated.h"
 
+#define MODULE_API SCWABILITYSYSTEMEXTENSIONS_API
+
 /**
  *	Inhibits an active gameplay effect while the tracked attribute is at or above its configured limit.
  *	The component keeps the inhibit state in sync as either attribute changes on the owning ability system.
@@ -27,9 +29,11 @@ private:
 	bool ShouldInhibitEffect(const FActiveGameplayEffect& InActiveEffect) const;
 
 public:
-	UPROPERTY(EditDefaultsOnly, Category = "Attributes")
+	UPROPERTY(Category = "Attributes", EditDefaultsOnly)
 	FGameplayAttribute ConditionAttribute;
 
-	UPROPERTY(EditDefaultsOnly, Category = "Attributes")
+	UPROPERTY(Category = "Attributes", EditDefaultsOnly)
 	FGameplayAttribute ConditionMaxAttribute;
 };
+
+#undef MODULE_API

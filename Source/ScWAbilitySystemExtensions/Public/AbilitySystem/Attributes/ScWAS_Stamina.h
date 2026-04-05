@@ -6,6 +6,8 @@
 
 #include "ScWAS_Stamina.generated.h"
 
+#define MODULE_API SCWABILITYSYSTEMEXTENSIONS_API
+
 /**
  *	Defines replicated stamina attributes and keeps stamina values clamped against the configured maximum.
  *	The set exposes the standard Gameplay Ability System attribute accessors for stamina gameplay.
@@ -51,3 +53,5 @@ protected:
 	virtual void OnRep_StaminaMax(const FGameplayAttributeData& InPrevValue);
 //~ End Replication
 };
+
+#undef MODULE_API

@@ -6,6 +6,8 @@
 
 #include "ScWAT_ModifyCharacterMovement.generated.h"
 
+#define MODULE_API SCWABILITYSYSTEMEXTENSIONS_API
+
 /**
  *	Applies a temporary movement vector to a character movement component from an ability task.
  *	The task supports additive force mode and optional timeout completion.
@@ -23,7 +25,7 @@ public:
 //~ Begin Initialize
 public:
 
-	UFUNCTION(BlueprintCallable, Category = "Ability | Tasks", meta = (HidePin = "InOwningAbility", DefaultToSelf = "InOwningAbility", BlueprintInternalUseOnly = "true"))
+	UFUNCTION(Category = "Ability | Tasks", BlueprintCallable, meta = (HidePin = "InOwningAbility", DefaultToSelf = "InOwningAbility", BlueprintInternalUseOnly = "true"))
 	static UScWAT_ModifyCharacterMovement* ModifyCharacterMovement(UGameplayAbility* InOwningAbility, class UCharacterMovementComponent* InTarget, FVector InMagnitude, const bool bInApplyAsForce = false, float InTimeOut = -1.0f);
 
 protected:
@@ -50,3 +52,5 @@ protected:
 	UPROPERTY()
 	TObjectPtr<class UCharacterMovementComponent> TargetCMC;
 };
+
+#undef MODULE_API

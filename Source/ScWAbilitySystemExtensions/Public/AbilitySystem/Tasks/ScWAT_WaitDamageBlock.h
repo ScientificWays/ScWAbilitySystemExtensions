@@ -6,6 +6,8 @@
 
 #include "ScWAT_WaitDamageBlock.generated.h"
 
+#define MODULE_API SCWABILITYSYSTEMEXTENSIONS_API
+
 /**
  *	Waits for a health component to report blocked damage and broadcasts the result through an ability task.
  *	The task can optionally stop after the first matching blocked hit.
@@ -23,7 +25,7 @@ public:
 //~ Begin Initialize
 public:
 
-	UFUNCTION(BlueprintCallable, Category = "Ability | Tasks", meta = (HidePin = "InOwningAbility", DefaultToSelf = "InOwningAbility", BlueprintInternalUseOnly = "true"))
+	UFUNCTION(Category = "Ability | Tasks", BlueprintCallable, meta = (HidePin = "InOwningAbility", DefaultToSelf = "InOwningAbility", BlueprintInternalUseOnly = "true"))
 	static UScWAT_WaitDamageBlock* WaitDamageBlock(UGameplayAbility* InOwningAbility, class UScWAttributeHealthComponent* InTargetHealthComponent, TSubclassOf<UDamageType> InDamageTypeClass, const bool bOnce = true);
 
 protected:
@@ -45,3 +47,5 @@ protected:
 	TSubclassOf<UDamageType> DamageTypeClass;
 //~ End Task
 };
+
+#undef MODULE_API

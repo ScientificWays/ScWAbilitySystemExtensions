@@ -8,6 +8,8 @@
 
 #include "ScWAT_MoveTarget.generated.h"
 
+#define MODULE_API SCWABILITYSYSTEMEXTENSIONS_API
+
 /**
  *	Moves or rotates a scene component over time as an ability task, with optional timeout and simulated task support.
  *	The task can operate with uniform speed or per-axis movement speeds while reporting completion and target loss.
@@ -28,13 +30,13 @@ class UScWAT_MoveTarget : public UAbilityTask
 	UPROPERTY(BlueprintAssignable, meta = (DisplayName = "On Target Lost"))
 	FGenericGameplayTaskDelegate OnTargetLost;
 
-	UFUNCTION(BlueprintCallable, Category = "Ability | Tasks", meta = (HidePin = "InOwningAbility", DefaultToSelf = "InOwningAbility", BlueprintInternalUseOnly = "true"))
+	UFUNCTION(Category = "Ability | Tasks", BlueprintCallable, meta = (HidePin = "InOwningAbility", DefaultToSelf = "InOwningAbility", BlueprintInternalUseOnly = "true"))
 	static UScWAT_MoveTarget* MoveComponentSweep(UGameplayAbility* InOwningAbility, USceneComponent* InAffectedComponent, const FVector& InTargetLocation, float InSpeed = 500.0f, float InArriveTolerance = 50.0f, float InTimeOut = -1.0f, bool bInApplyForce = false);
 	
-	UFUNCTION(BlueprintCallable, Category = "Ability | Tasks", meta = (HidePin = "InOwningAbility", DefaultToSelf = "InOwningAbility", BlueprintInternalUseOnly = "true"))
+	UFUNCTION(Category = "Ability | Tasks", BlueprintCallable, meta = (HidePin = "InOwningAbility", DefaultToSelf = "InOwningAbility", BlueprintInternalUseOnly = "true"))
 	static UScWAT_MoveTarget* MoveComponentSweep_WithSpeedPerAxis(UGameplayAbility* InOwningAbility, USceneComponent* InAffectedComponent, const FVector& InTargetLocation, const FVector& InSpeedPerAxis = FVector(400.0f), float InArriveTolerance = 50.0f, float InTimeOut = -1.0f, bool bInApplyForce = false);
 
-	UFUNCTION(BlueprintCallable, Category = "Ability | Tasks", meta = (HidePin = "InOwningAbility", DefaultToSelf = "InOwningAbility", BlueprintInternalUseOnly = "true"))
+	UFUNCTION(Category = "Ability | Tasks", BlueprintCallable, meta = (HidePin = "InOwningAbility", DefaultToSelf = "InOwningAbility", BlueprintInternalUseOnly = "true"))
 	static UScWAT_MoveTarget* RotateComponentSweep(UGameplayAbility* InOwningAbility, USceneComponent* InAffectedComponent, const FRotator& InTargetRotation, float InRotateSpeed = 16.0f, float InArriveTolerance = 0.01f, float InTimeOut = -1.0f);
 
 	//~ Begin Initialize
@@ -96,3 +98,5 @@ protected:
 
 	FTimerHandle TimeOutTimerHandle;
 };
+
+#undef MODULE_API
